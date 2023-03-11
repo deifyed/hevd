@@ -7,8 +7,10 @@ import (
 	"github.com/tuuturu/hevd/pkg/apis/hevd.tuuturu.org/v1alpha1"
 )
 
-var failedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#ff0000"))
-var passedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ff00"))
+var (
+	failedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#ff0000"))
+	passedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ff00"))
+)
 
 type logger interface {
 	Info(args ...interface{})
