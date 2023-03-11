@@ -42,8 +42,6 @@ func RunE(log logger, fs *afero.Afero) func(cmd *cobra.Command, args []string) e
 			}
 
 			runner.Push(mapToGenericCase(suite.Cases))
-
-			break
 		default:
 			return fmt.Errorf("unknown test type: %s", testType)
 		}
