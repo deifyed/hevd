@@ -7,7 +7,9 @@ build:
 	echo "This target must always build a production version of the software"
 
 test:
-	echo "This target must always run the test suite and return an exit code of 0 if all tests pass, or 1 if any test fails"
+	find . -name '*.go' | entr -r go run run main.go docs/examples/minimal-curl.yaml
+test-watch:
+	find . -name '*.go' | entr -r make test
 
 clean:
 	echo "This target must always clean up any temporary files created by the build process"

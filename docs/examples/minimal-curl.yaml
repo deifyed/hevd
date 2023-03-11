@@ -1,0 +1,8 @@
+type: http
+
+cases:
+  - name: Should always return 200
+    with:
+      url: http://localhost:3000/z/health
+    expect:
+      statusCode: 200
