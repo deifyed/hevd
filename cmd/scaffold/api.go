@@ -25,7 +25,10 @@ func RunE() func(*cobra.Command, []string) error {
 			return fmt.Errorf("unknown test type: %s", testType)
 		}
 
-		io.Copy(cmd.OutOrStdout(), strings.NewReader(output))
+		_, err := io.Copy(cmd.OutOrStdout(), strings.NewReader(output))
+		if err != nil {
+			return fmt.Errorf("writing output: %w", err)
+		}
 
 		return nil
 	}
