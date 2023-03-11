@@ -3,6 +3,11 @@ type: http
 cases:
   - name: Should always return 200
     with:
-      url: http://localhost:3000/z/health
+      url: https://example.com
     expect:
       statusCode: 200
+  - name: Should always fail since this request never returns 201
+    with:
+      url: https://example.com
+    expect:
+      statusCode: 201
