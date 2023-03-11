@@ -1,0 +1,8 @@
+type: http
+
+cases:
+  - name: should return 200
+    with:
+      url: https://example.com
+    expect:
+      statusCode: 200
