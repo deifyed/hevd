@@ -8,10 +8,11 @@ import (
 
 // runCmd represents the run command
 var runCmd = &cobra.Command{
-	Use:   "run",
-	Short: "A brief description of your command",
-	Args:  cobra.ExactArgs(1),
-	RunE:  run.RunE(log, fs),
+	Use:     "run",
+	Short:   "Run a test suite",
+	Example: `  hevd run ./suite.yaml`,
+	Args:    cobra.ExactArgs(1),
+	RunE:    run.RunE(log, fs),
 }
 
 func init() {
