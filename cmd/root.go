@@ -16,7 +16,7 @@ var (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:          "hevd",
-	Short:        "Quickly test externally and generally",
+	Short:        "Quickly test externally, generally and declaratively",
 	SilenceUsage: true,
 }
 
