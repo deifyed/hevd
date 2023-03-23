@@ -10,6 +10,7 @@ import (
 var (
 	failedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#ff0000"))
 	passedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ff00"))
+	verboseStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ffff"))
 )
 
 type logger interface {
@@ -20,6 +21,7 @@ type logger interface {
 type Runner struct {
 	testCases []v1alpha1.Case
 	Log       logger
+	Verbose   bool
 }
 
 func (r *Runner) Push(t []v1alpha1.Case) {
@@ -35,6 +37,10 @@ func (r *Runner) Run() (bool, error) {
 			fmt.Printf("[ %s ] %s\n", passedTestStyle.Render("PASS"), t.Name())
 		} else {
 			fmt.Printf("[ %s ] %s\n", failedTestStyle.Render("FAIL"), t.Name())
+
+			if r.Verbose {
+				fmt.Printf("%s\n", verboseStyle.Render(err.Error()))
+			}
 
 			ok = false
 		}
