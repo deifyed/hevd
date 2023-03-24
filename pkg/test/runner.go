@@ -10,7 +10,7 @@ import (
 var (
 	failedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#ff0000"))
 	passedTestStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ff00"))
-	verboseStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("#00ffff"))
+	verboseStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("#504945"))
 )
 
 type logger interface {
@@ -39,7 +39,7 @@ func (r *Runner) Run() (bool, error) {
 			fmt.Printf("[ %s ] %s\n", failedTestStyle.Render("FAIL"), t.Name())
 
 			if r.Verbose {
-				fmt.Printf("%s\n", verboseStyle.Render(err.Error()))
+				fmt.Printf("\t%s\n", verboseStyle.Render(err.Error()))
 			}
 
 			ok = false

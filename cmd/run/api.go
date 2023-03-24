@@ -4,23 +4,22 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
 	"github.com/tuuturu/hevd/pkg/http"
 	"github.com/tuuturu/hevd/pkg/test"
 	"k8s.io/apimachinery/pkg/util/yaml"
 )
 
-func RunE(log logger, fs *afero.Afero) func(cmd *cobra.Command, args []string) error {
+func RunE(log logger, opts *Options) func(cmd *cobra.Command, args []string) error {
 	return func(cmd *cobra.Command, args []string) error {
 		targetPath := args[0]
 
-		err := validatePath(fs, targetPath)
+		err := validatePath(opts.FileSystem, targetPath)
 		if err != nil {
 			return fmt.Errorf("validating path: %w", err)
 		}
 
-		result, err := fs.ReadFile(targetPath)
+		result, err := opts.FileSystem.ReadFile(targetPath)
 		if err != nil {
 			return fmt.Errorf("reading target: %w", err)
 		}
@@ -30,7 +29,7 @@ func RunE(log logger, fs *afero.Afero) func(cmd *cobra.Command, args []string) e
 			return fmt.Errorf("acquiring test type: %w", err)
 		}
 
-		runner := test.Runner{Log: log}
+		runner := test.Runner{Log: log, Verbose: opts.Verbose}
 
 		switch testType {
 		case "http":
