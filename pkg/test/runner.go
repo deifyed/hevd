@@ -22,6 +22,7 @@ type Runner struct {
 	testCases []v1alpha1.Case
 	Log       logger
 	Verbose   bool
+	FailFast  bool
 }
 
 func (r *Runner) Push(t []v1alpha1.Case) {
@@ -40,6 +41,10 @@ func (r *Runner) Run() (bool, error) {
 
 			if r.Verbose {
 				fmt.Printf("\t%s\n", verboseStyle.Render(err.Error()))
+			}
+
+			if r.FailFast {
+				return false, nil
 			}
 
 			ok = false

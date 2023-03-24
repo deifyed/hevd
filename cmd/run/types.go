@@ -12,4 +12,5 @@ type logger interface {
 type Options struct {
 	FileSystem *afero.Afero
 	Verbose    bool
+	FailFast   bool
 }

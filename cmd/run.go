@@ -10,6 +10,7 @@ import (
 var runCmdOpts = run.Options{
 	FileSystem: fs,
 	Verbose:    false,
+	FailFast:   false,
 }
 
 var runCmd = &cobra.Command{
@@ -24,6 +25,7 @@ func init() {
 	log.SetLevel(logrus.DebugLevel)
 
 	runCmd.Flags().BoolVarP(&runCmdOpts.Verbose, "verbose", "v", false, "Verbose output from failed tests")
+	runCmd.Flags().BoolVarP(&runCmdOpts.FailFast, "fail-fast", "f", false, "Stop running tests after the first failure")
 
 	rootCmd.AddCommand(runCmd)
 }

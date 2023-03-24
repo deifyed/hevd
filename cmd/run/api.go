@@ -29,7 +29,11 @@ func RunE(log logger, opts *Options) func(cmd *cobra.Command, args []string) err
 			return fmt.Errorf("acquiring test type: %w", err)
 		}
 
-		runner := test.Runner{Log: log, Verbose: opts.Verbose}
+		runner := test.Runner{
+			Log:      log,
+			Verbose:  opts.Verbose,
+			FailFast: opts.FailFast,
+		}
 
 		switch testType {
 		case "http":
